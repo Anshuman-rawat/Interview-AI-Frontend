@@ -12,11 +12,15 @@ const Home = () => {
 
     const navigate = useNavigate()
 
-    const handleGenerateReport = async () => {
-        const resumeFile = resumeInputRef.current.files[ 0 ]
-        const data = await generateReport({ jobDescription, selfDescription, resumeFile })
+const handleGenerateReport = async () => {
+    const resumeFile = resumeInputRef.current.files[0]
+    const data = await generateReport({ jobDescription, selfDescription, resumeFile })
+    if (data) {
         navigate(`/interview/${data._id}`)
+    } else {
+        alert("The AI service is busy right now. Please try again in a minute.")
     }
+}
 
     if (loading) {
         return (
